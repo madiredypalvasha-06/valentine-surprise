@@ -1,0 +1,1581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BUBUDUDU - Our Story</title>
+<!-- Add Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --rose: #ff6b9d;
+  --deep-rose: #c44569;
+  --gold: #ffd93d;
+  --cream: #fff8e7;
+  --dark: #0a0a0a;
+}
+
+body {
+  background: var(--dark);
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  overflow-x: hidden;
+  position: relative;
+  cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="%23ff6b9d" d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>'), auto;
+}
+
+/* Animated Background */
+.starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* Floating particles */
+.particle-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(circle, var(--rose), transparent);
+  border-radius: 50%;
+  opacity: 0;
+  animation: float-up 15s infinite;
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(100vh) translateX(0) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px) scale(1);
+    opacity: 0;
+  }
+}
+
+/* Scene Management */
+.scene {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1),
+              visibility 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 10;
+  padding: 40px;
+}
+
+.scene.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.scene-content {
+  max-width: 1000px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Typography */
+.title-main {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 10vw, 8rem);
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--rose) 0%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  letter-spacing: 0.02em;
+  animation: shine 3s infinite;
+  text-shadow: 0 0 30px rgba(255, 107, 157, 0.3);
+}
+
+@keyframes shine {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.3); }
+}
+
+.subtitle {
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--cream);
+  opacity: 0.9;
+  line-height: 1.8;
+  margin: 1.5rem 0;
+  font-weight: 300;
+}
+
+.accent-text {
+  color: var(--rose);
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Scene 1: Opening */
+#scene1 .subtitle {
+  animation: fadeSlideUp 1s ease-out 0.5s both;
+}
+
+#scene1 .subtitle:nth-child(2) {
+  animation-delay: 1s;
+}
+
+#scene1 .subtitle:nth-child(3) {
+  animation-delay: 1.5s;
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
+
+/* Scene 2: Title Scene */
+#scene2 .title-main {
+  animation: scaleIn 1.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.nickname-list {
+  margin-top: 3rem;
+}
+
+.nickname {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  margin: 1rem 0;
+  opacity: 0;
+  animation: slideFromSide 0.8s ease-out both;
+}
+
+.nickname:nth-child(odd) {
+  animation-name: slideFromLeft;
+}
+
+.nickname:nth-child(even) {
+  animation-name: slideFromRight;
+}
+
+.nickname:nth-child(1) { animation-delay: 0.5s; }
+.nickname:nth-child(2) { animation-delay: 0.7s; }
+.nickname:nth-child(3) { animation-delay: 0.9s; }
+.nickname:nth-child(4) { animation-delay: 1.1s; }
+.nickname:nth-child(5) { animation-delay: 1.3s; }
+
+@keyframes slideFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scene 3: Timeline */
+.timeline-container {
+  position: relative;
+  max-width: 900px;
+  max-height: 70vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 0 auto;
+  padding: 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--rose) transparent;
+}
+
+.timeline-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: var(--rose);
+  border-radius: 10px;
+}
+
+.timeline-item {
+  display: flex;
+  align-items: center;
+  margin: 2rem 0;
+  opacity: 0;
+  animation: fadeIn 1s ease-out both;
+}
+
+.timeline-item:nth-child(1) { animation-delay: 0.2s; }
+.timeline-item:nth-child(2) { animation-delay: 0.4s; }
+.timeline-item:nth-child(3) { animation-delay: 0.6s; }
+.timeline-item:nth-child(4) { animation-delay: 0.8s; }
+.timeline-item:nth-child(5) { animation-delay: 1s; }
+.timeline-item:nth-child(6) { animation-delay: 1.2s; }
+.timeline-item:nth-child(7) { animation-delay: 1.4s; }
+.timeline-item:nth-child(8) { animation-delay: 1.6s; }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-icon {
+  font-size: 3rem;
+  min-width: 100px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.timeline-content {
+  flex: 1;
+  text-align: left;
+  padding: 1.5rem;
+  background: rgba(255, 107, 157, 0.1);
+  border-left: 3px solid var(--rose);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateX(10px);
+}
+
+.timeline-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: var(--rose);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.timeline-text {
+  font-size: 1.3rem;
+  line-height: 1.6;
+}
+
+/* Scene 4: Photo Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.photo-card {
+  position: relative;
+  aspect-ratio: 3/4;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(255, 107, 157, 0.4);
+  opacity: 0;
+  animation: photoReveal 1s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: linear-gradient(135deg, var(--rose), var(--deep-rose));
+}
+
+.photo-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 30px 80px rgba(255, 107, 157, 0.6);
+}
+
+.photo-card:nth-child(1) { animation-delay: 0.2s; }
+.photo-card:nth-child(2) { animation-delay: 0.4s; }
+.photo-card:nth-child(3) { animation-delay: 0.6s; }
+.photo-card:nth-child(4) { animation-delay: 0.8s; }
+
+@keyframes photoReveal {
+  from {
+    opacity: 0;
+    transform: scale(0.8) rotateY(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateY(0deg);
+  }
+}
+
+.photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.photo-card:hover .photo-img {
+  transform: scale(1.05);
+}
+
+.photo-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+  font-size: 1.2rem;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+}
+
+.photo-card:hover .photo-caption {
+  transform: translateY(0);
+}
+
+/* Scene 5: Letter */
+.letter-container {
+  max-width: 700px;
+  padding: 3rem;
+  background: rgba(255, 248, 231, 0.05);
+  border: 2px solid rgba(255, 107, 157, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: letterUnfold 1.5s ease-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes letterUnfold {
+  from {
+    opacity: 0;
+    transform: scale(0.9) rotateX(-15deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotateX(0deg);
+  }
+}
+
+.letter-header {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: var(--rose);
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.letter-text {
+  font-size: 1.4rem;
+  line-height: 2;
+  text-align: left;
+  margin: 1.5rem 0;
+  opacity: 0;
+  animation: fadeIn 1s ease-out both;
+}
+
+.letter-text:nth-child(2) { animation-delay: 0.5s; }
+.letter-text:nth-child(3) { animation-delay: 1s; }
+.letter-text:nth-child(4) { animation-delay: 1.5s; }
+
+.signature {
+  text-align: right;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: var(--rose);
+  margin-top: 3rem;
+  font-style: italic;
+  position: relative;
+}
+
+.signature::before {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 0;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rose));
+}
+
+/* Scene 6: Interactive Choice */
+.choice-container {
+  text-align: center;
+}
+
+.choice-btn {
+  display: inline-block;
+  padding: 1.5rem 4rem;
+  margin: 2rem 1rem;
+  font-size: 1.8rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  color: var(--dark);
+  background: linear-gradient(135deg, var(--rose), var(--gold));
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 10px 40px rgba(255, 107, 157, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.choice-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.choice-btn:hover::before {
+  width: 400px;
+  height: 400px;
+}
+
+.choice-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(255, 107, 157, 0.6);
+}
+
+/* Scene 7: Finale */
+.finale-container {
+  position: relative;
+  animation: finaleFadeIn 2s ease-out both;
+}
+
+@keyframes finaleFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.finale-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 1.3;
+  background: linear-gradient(135deg, var(--rose), var(--gold), var(--rose));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% auto;
+  animation: gradientFlow 3s linear infinite, finalePulse 2s ease-in-out infinite;
+  margin-bottom: 2rem;
+}
+
+@keyframes gradientFlow {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes finalePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.ring-icon {
+  display: inline-block;
+  font-size: 5rem;
+  animation: ringRotate 4s ease-in-out infinite;
+  margin: 2rem 0;
+}
+
+@keyframes ringRotate {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-15deg) scale(1.1); }
+  75% { transform: rotate(15deg) scale(1.1); }
+}
+
+/* Navigation */
+.nav-indicator {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 107, 157, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background: var(--rose);
+  box-shadow: 0 0 15px var(--rose);
+}
+
+.nav-dot.active::before {
+  border-color: var(--rose);
+}
+
+.nav-dot:hover {
+  background: var(--rose);
+  transform: scale(1.2);
+}
+
+/* Progress Bar */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 200;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose), var(--gold));
+  width: 0%;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--rose);
+}
+
+/* Controls */
+.controls {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.3);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 107, 157, 0.2);
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgba(255, 107, 157, 0.2);
+  border: 2px solid var(--rose);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  font-size: 1.2rem;
+}
+
+.control-btn:hover {
+  background: rgba(255, 107, 157, 0.4);
+  transform: scale(1.1);
+  box-shadow: 0 0 15px var(--rose);
+}
+
+/* Floating Hearts Effect */
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 500;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0;
+  animation: heartFloat 6s ease-in forwards;
+}
+
+@keyframes heartFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) rotate(0deg) scale(0);
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120vh) rotate(360deg) scale(1.5);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .scene {
+    padding: 20px;
+  }
+  
+  .timeline-item {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .timeline-content {
+    text-align: center;
+  }
+  
+  .timeline-icon {
+    min-width: auto;
+    margin-bottom: 1rem;
+  }
+  
+  .letter-container {
+    padding: 2rem;
+  }
+  
+  .letter-header,
+  .letter-text {
+    text-align: center;
+  }
+  
+  .signature {
+    text-align: center;
+  }
+  
+  .signature::before {
+    right: 50%;
+    transform: translateX(50%);
+  }
+  
+  .nav-indicator {
+    right: 15px;
+  }
+  
+  .controls {
+    bottom: 15px;
+  }
+  
+  .choice-btn {
+    display: block;
+    margin: 1rem auto;
+    width: 90%;
+  }
+}
+
+/* Countdown Timer */
+.countdown {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  margin: 3rem 0;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  text-align: center;
+}
+
+.countdown-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--rose);
+  font-weight: 900;
+  display: block;
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+}
+
+.countdown-label {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+}
+
+/* Volume Slider */
+.volume-slider {
+  width: 100px;
+  height: 5px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 107, 157, 0.2);
+  border-radius: 5px;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--rose);
+  cursor: pointer;
+  border: 2px solid var(--cream);
+}
+
+/* Music Player Styles */
+.music-player {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border: 1px solid rgba(255, 107, 157, 0.3);
+}
+
+.music-info {
+  color: var(--cream);
+  font-size: 0.9rem;
+}
+
+.music-info h3 {
+  color: var(--rose);
+  margin-bottom: 5px;
+}
+
+/* Image Upload Button */
+.image-upload-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+  background: var(--rose);
+  color: var(--dark);
+  border: none;
+  border-radius: 50px;
+  padding: 15px 25px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 20px rgba(255, 107, 157, 0.4);
+}
+
+.image-upload-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(255, 107, 157, 0.6);
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 107, 157, 0.9);
+  color: white;
+  padding: 15px 30px;
+  border-radius: 10px;
+  z-index: 1000;
+  display: none;
+  backdrop-filter: blur(10px);
+}
+
+.toast.show {
+  display: block;
+  animation: toastSlide 0.3s ease-out;
+}
+
+@keyframes toastSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+</style>
+</head>
+<body>
+  <!-- Starfield Background -->
+  <div class="starfield" id="starfield"></div>
+  
+  <!-- Floating Particles -->
+  <div class="particle-container" id="particles"></div>
+  
+  <!-- Progress Bar -->
+  <div class="progress-bar">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+  
+  <!-- Music Player -->
+  <div class="music-player" id="musicPlayer">
+    <div class="control-btn" id="musicToggleBtn">
+      <i class="fas fa-play"></i>
+    </div>
+    <div class="music-info">
+      <h3>Young And Beautiful</h3>
+      <p>Lana Del Rey</p>
+    </div>
+    <input type="range" min="0" max="1" step="0.1" value="0.5" class="volume-slider" id="volumeSlider">
+  </div>
+  
+  <!-- Navigation Dots -->
+  <div class="nav-indicator" id="navDots"></div>
+  
+  <!-- Controls -->
+  <div class="controls">
+    <div class="control-btn" id="prevBtn" title="Previous">
+      <i class="fas fa-chevron-left"></i>
+    </div>
+    <div class="control-btn" id="playPauseBtn" title="Auto-play">
+      <i class="fas fa-pause"></i>
+    </div>
+    <div class="control-btn" id="nextBtn" title="Next">
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </div>
+  
+  <!-- Image Upload Button -->
+  <button class="image-upload-btn" id="imageUploadBtn">
+    <i class="fas fa-camera"></i> Add Our Photos
+  </button>
+  
+  <!-- Toast Notification -->
+  <div class="toast" id="toast"></div>
+  
+  <!-- Hearts Container -->
+  <div class="hearts-container" id="heartsContainer"></div>
+  
+  <!-- Scene 1: Opening -->
+  <div class="scene active" id="scene1">
+    <div class="scene-content">
+      <h1 class="title-main">Where Dreams Begin</h1>
+      <p class="subtitle">Every extraordinary love story starts with a moment...</p>
+      <p class="subtitle">A glance, a word, a feeling that changes everything.</p>
+      <p class="subtitle"><span class="accent-text">July 16, 2025</span> — The day our forever began</p>
+    </div>
+  </div>
+  
+  <!-- Scene 2: Title -->
+  <div class="scene" id="scene2">
+    <div class="scene-content">
+      <h1 class="title-main">BUBUDUDU</h1>
+      <p class="subtitle">This is our universe. Our story. Our us.</p>
+      <div class="nickname-list">
+        <div class="nickname">Palvasha 💕 Dharan</div>
+        <div class="nickname" style="color: var(--rose); font-size: clamp(1.8rem, 5vw, 3rem); margin-top: 2rem;">
+          Two souls, infinite names, one eternal bond
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 3: Valentine's Week -->
+  <div class="scene" id="scene3">
+    <div class="scene-content">
+      <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 3rem;">Our Valentine's Week Journey</h1>
+      <div class="timeline-container">
+        <div class="timeline-item">
+          <div class="timeline-icon">🌹</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Rose Day - Feb 7</div>
+            <div class="timeline-text">I choose you, today and every day that follows. Like a rose, our love blooms more beautiful each day.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">💍</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Propose Day - Feb 8</div>
+            <div class="timeline-text">I promise you my heart, my laughter, my forever. Will you be mine for all eternity?</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🍫</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Chocolate Day - Feb 9</div>
+            <div class="timeline-text">You're sweeter than the finest chocolate. Every moment with you is a treat I cherish.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🧸</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Teddy Day - Feb 10</div>
+            <div class="timeline-text">You're my comfort, my cuddle buddy, my everything. Just like a teddy bear, you make everything better.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🤝</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Promise Day - Feb 11</div>
+            <div class="timeline-text">I promise to love you in sunshine and storms, to stand by you, to be your forever.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">🤗</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Hug Day - Feb 12</div>
+            <div class="timeline-text">In your arms, I found the home I'd been searching for. Your embrace is my safe haven.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">💋</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Kiss Day - Feb 13</div>
+            <div class="timeline-text">The moment I realized falling was just the beginning. Every kiss writes another chapter of our story.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-icon">❤️</div>
+          <div class="timeline-content">
+            <div class="timeline-date">Valentine's Day - Feb 14</div>
+            <div class="timeline-text">Today we celebrate us. Our love. Our forever. You are my Valentine, today and always.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 4: Photo Gallery -->
+<div class="scene" id="scene4">
+  <div class="scene-content">
+    <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 3rem;">Our Precious Moments</h1>
+    <div class="gallery" id="photoGallery">
+      <!-- Images will load automatically -->
+      <div class="photo-card">
+        <img src="photo1.jpeg" class="photo-img" data-index="1" alt="Our first photo">
+        <div class="photo-caption">The rain didn't just fall — it watched us fall in love.</div>
+      </div>
+      <div class="photo-card">
+        <img src="photo2.jpeg" class="photo-img" data-index="2" alt="Our love">
+        <div class="photo-caption">When I knew you were the one</div>
+      </div>
+      <div class="photo-card">
+        <img src="photo3.jpeg" class="photo-img" data-index="3" alt="Favorite memory">
+        <div class="photo-caption">First bike ride together — and suddenly the whole city felt smaller.</div>
+      </div>
+      <div class="photo-card">
+        <img src="photo4.jpeg" class="photo-img" data-index="4" alt="Magic moments">
+        <div class="photo-caption">Walking away from the world, towards you.</div>
+      </div>
+    </div>
+    <p class="subtitle" style="margin-top: 3rem; font-style: italic;">
+      Click "Add Our Photos" to upload our real memories ❤️
+    </p>
+  </div>
+</div>
+  
+  <!-- Scene 5: Letter -->
+  <div class="scene" id="scene5">
+    <div class="scene-content">
+      <div class="letter-container">
+        <div class="letter-header">Dear Kanna,</div>
+        <p class="letter-text">
+          I don't know the exact moment you became my everything. Was it the first time you called me Bubu? Or perhaps when I realized that your voice is the only sound I want to hear when I wake up?
+        </p>
+        <p class="letter-text">
+          What I do know is this: somewhere between all our late-night conversations and stolen glances, you became my home. Not just a place I want to be, but the only place where I truly feel like myself.
+        </p>
+        <p class="letter-text">
+          You are my safe place, my biggest adventure, my favorite chaos, and my calmest peace all at once. You are the answer to questions I didn't even know I was asking.
+        </p>
+        <p class="letter-text">
+          Thank you for being my Dudu, my Aru, my Kanna. Thank you for being mine.
+        </p>
+        <div class="signature">Forever yours, Pallu 💕</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 6: Time Together -->
+  <div class="scene" id="scene6">
+    <div class="scene-content">
+      <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 2rem;">Our Time Together</h1>
+      <div class="countdown" id="countdown">
+        <div class="countdown-item">
+          <span class="countdown-value" id="days">0</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="hours">0</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-item">
+          <span class="countdown-value" id="minutes">0</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+      </div>
+      <p class="subtitle" style="margin-top: 3rem;">
+        Since July 16, 2025 — and counting every beautiful second with you
+      </p>
+      <p class="subtitle accent-text" style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-top: 2rem;">
+        Here's to infinity more moments together
+      </p>
+    </div>
+  </div>
+  
+  <!-- Scene 7: The Question -->
+  <div class="scene" id="scene7">
+    <div class="scene-content">
+      <div class="choice-container">
+        <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem);">In Every Universe...</h1>
+        <p class="subtitle" style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin: 2rem 0;">
+          Through every lifetime, every reality, every possibility...
+        </p>
+        <p class="subtitle accent-text" style="font-size: clamp(1.8rem, 5vw, 3rem); margin: 2rem 0;">
+          I would choose you again and again and again.
+        </p>
+        <button class="choice-btn" id="foreverBtn">Forever? 💕</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 8: Reasons Why I Love You -->
+  <div class="scene" id="scene8">
+    <div class="scene-content">
+      <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 2rem;">Why I Love You</h1>
+      <div class="letter-container" style="max-width: 800px;">
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--gold);">
+            <div class="timeline-text">Your smile lights up my darkest days</div>
+          </div>
+        </div>
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--rose);">
+            <div class="timeline-text">The way you understand me without words</div>
+          </div>
+        </div>
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--gold);">
+            <div class="timeline-text">How you make ordinary moments extraordinary</div>
+          </div>
+        </div>
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--rose);">
+            <div class="timeline-text">Your laugh is my favorite sound in the world</div>
+          </div>
+        </div>
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--gold);">
+            <div class="timeline-text">The way you make me feel safe and loved</div>
+          </div>
+        </div>
+        <div class="timeline-item" style="margin: 1.5rem 0;">
+          <div class="timeline-content" style="border-left-color: var(--rose);">
+            <div class="timeline-text">Because you're you, and that's more than enough</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 9: Our Dreams -->
+  <div class="scene" id="scene9">
+    <div class="scene-content">
+      <h1 class="title-main" style="font-size: clamp(2.5rem, 7vw, 5rem); margin-bottom: 2rem;">Our Future Together</h1>
+      <div class="subtitle" style="font-size: clamp(1.3rem, 3vw, 2rem); margin: 2rem 0; line-height: 2.2;">
+        <p style="margin: 1.5rem 0;">I dream of lazy Sunday mornings with you,</p>
+        <p style="margin: 1.5rem 0;">Building a home filled with laughter and love,</p>
+        <p style="margin: 1.5rem 0;">Adventures in places we've never been,</p>
+        <p style="margin: 1.5rem 0;">Growing old together, hand in hand,</p>
+        <p style="margin: 1.5rem 0;">Creating a lifetime of beautiful memories.</p>
+        <p class="accent-text" style="margin-top: 3rem; font-size: clamp(1.5rem, 4vw, 2.5rem);">
+          Every dream I have includes you.
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 10: Thank You -->
+  <div class="scene" id="scene10">
+    <div class="scene-content">
+      <div class="letter-container">
+        <div class="letter-header">Thank You, My Love</div>
+        <p class="letter-text">
+          Thank you for choosing me every single day. For seeing me at my worst and still thinking I'm worth it.
+        </p>
+        <p class="letter-text">
+          Thank you for the late-night conversations, the silly jokes, the comfortable silences, and the deep talks about everything and nothing.
+        </p>
+        <p class="letter-text">
+          Thank you for being my best friend, my partner, my home. For making me believe in love stories and happy endings.
+        </p>
+        <p class="letter-text">
+          Thank you for being patient with me, for believing in us, for never giving up on what we have.
+        </p>
+        <p class="letter-text">
+          Most of all, thank you for being exactly who you are. I wouldn't change a single thing about you.
+        </p>
+        <div class="signature">With all my love, Your Bubu 💕</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Scene 11: Finale -->
+  <div class="scene" id="scene11">
+    <div class="scene-content">
+      <div class="finale-container">
+        <h1 class="finale-title">You Are My Always & Forever</h1>
+        <div class="ring-icon">💍</div>
+        <p class="subtitle" style="font-size: clamp(1.5rem, 4vw, 2.5rem); margin-top: 2rem;">
+          Happy Valentine's Day, Kanna
+        </p>
+        <p class="subtitle accent-text" style="font-size: clamp(1.8rem, 5vw, 3rem); margin-top: 1rem;">
+          I love you more than words can say
+        </p>
+        <p class="subtitle" style="margin-top: 3rem; font-style: italic; opacity: 0.8;">
+          — Your Bubu, always and forever 💕
+        </p>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Configuration
+const startDate = new Date('2025-07-16');
+let currentScene = 1;
+const totalScenes = 11;
+let isAutoPlaying = true;
+let autoPlayInterval;
+
+// Music Configuration
+let backgroundMusic = null;
+let isMusicPlaying = false;
+
+// Initialize
+window.addEventListener('load', init);
+
+function init() {
+  createStarfield();
+  createParticles();
+  createNavDots();
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
+  setupImageUpload();
+  setupMusic();
+  
+  // Event Listeners
+  document.getElementById('prevBtn').addEventListener('click', () => navigateScene(-1));
+  document.getElementById('nextBtn').addEventListener('click', () => navigateScene(1));
+  document.getElementById('playPauseBtn').addEventListener('click', toggleAutoPlay);
+  document.getElementById('foreverBtn').addEventListener('click', showFinale);
+  
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') navigateScene(-1);
+    if (e.key === 'ArrowRight') navigateScene(1);
+    if (e.key === ' ') {
+      e.preventDefault();
+      toggleAutoPlay();
+    }
+    if (e.key === 'm') toggleMusic();
+  });
+  
+  // Start auto-play
+  startAutoPlay();
+  
+  // Show initial toast
+  showToast('Click "Add Our Photos" to add your personal photos! 💕');
+}
+
+// SIMPLE WORKING MUSIC SETUP
+function setupMusic() {
+  // Using free romantic music from Mixkit
+  backgroundMusic = new Audio('song.mp3');
+  backgroundMusic.loop = true;
+  backgroundMusic.volume = 0.3;
+  backgroundMusic.preload = 'auto';
+  
+  // Set up music toggle button
+  const musicBtn = document.getElementById('musicToggleBtn');
+  
+  musicBtn.addEventListener('click', () => {
+    if (backgroundMusic.paused) {
+      backgroundMusic.play()
+        .then(() => {
+          musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          isMusicPlaying = true;
+          showToast('Music started! 🎵');
+        })
+        .catch(error => {
+          showToast('Click to start music');
+          console.log('Playback error:', error);
+        });
+    } else {
+      backgroundMusic.pause();
+      musicBtn.innerHTML = '<i class="fas fa-play"></i>';
+      isMusicPlaying = false;
+    }
+  });
+  
+  // Volume control
+  document.getElementById('volumeSlider').addEventListener('input', (e) => {
+    backgroundMusic.volume = e.target.value;
+  });
+  
+  // Update music info
+  document.querySelector('.music-info h3').textContent = 'Romantic Moment';
+  document.querySelector('.music-info p').textContent = 'Love Theme';
+  
+  // Try to auto-play when user clicks anywhere
+  document.addEventListener('click', () => {
+    if (!isMusicPlaying) {
+      backgroundMusic.play()
+        .then(() => {
+          musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+          isMusicPlaying = true;
+        })
+        .catch(() => {
+          // User needs to click music button
+        });
+    }
+  }, { once: true });
+}
+
+function toggleMusic() {
+  const musicBtn = document.getElementById('musicToggleBtn');
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    musicBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  } else {
+    backgroundMusic.pause();
+    musicBtn.innerHTML = '<i class="fas fa-play"></i>';
+  }
+}
+
+// Image Upload Setup
+function setupImageUpload() {
+  const uploadBtn = document.getElementById('imageUploadBtn');
+  const gallery = document.getElementById('photoGallery');
+  
+  uploadBtn.addEventListener('click', () => {
+    const fileInput = document.createElement('input');
+    fileInput.type = 'file';
+    fileInput.accept = 'image/*';
+    fileInput.multiple = true;
+    
+    fileInput.onchange = (e) => {
+      const files = Array.from(e.target.files);
+      
+      if (files.length > 4) {
+        showToast('Please select up to 4 photos only');
+        return;
+      }
+      
+      files.forEach((file, index) => {
+        const reader = new FileReader();
+        
+        reader.onload = (event) => {
+          const photoCards = document.querySelectorAll('.photo-card');
+          if (photoCards[index]) {
+            const img = photoCards[index].querySelector('.photo-img');
+            if (img) {
+              img.src = event.target.result;
+              showToast(`Photo ${index + 1} added successfully! 📸`);
+            }
+          }
+        };
+        
+        reader.readAsDataURL(file);
+      });
+    };
+    
+    fileInput.click();
+  });
+}
+
+// Toast Notification
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// Starfield
+function createStarfield() {
+  const starfield = document.getElementById('starfield');
+  for (let i = 0; i < 150; i++) {
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 100 + '%';
+    star.style.animationDelay = Math.random() * 3 + 's';
+    starfield.appendChild(star);
+  }
+}
+
+// Particles
+function createParticles() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = (10 + Math.random() * 10) + 's';
+    container.appendChild(particle);
+  }
+}
+
+// Navigation Dots
+function createNavDots() {
+  const container = document.getElementById('navDots');
+  for (let i = 1; i <= totalScenes; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'nav-dot' + (i === 1 ? ' active' : '');
+    dot.addEventListener('click', () => goToScene(i));
+    container.appendChild(dot);
+  }
+}
+
+// Scene Navigation
+function navigateScene(direction) {
+  const newScene = currentScene + direction;
+  if (newScene >= 1 && newScene <= totalScenes) {
+    goToScene(newScene);
+  }
+}
+
+function goToScene(sceneNum) {
+  document.getElementById(`scene${currentScene}`).classList.remove('active');
+  currentScene = sceneNum;
+  document.getElementById(`scene${currentScene}`).classList.add('active');
+  
+  const dots = document.querySelectorAll('.nav-dot');
+  dots.forEach((dot, index) => {
+    dot.classList.toggle('active', index + 1 === currentScene);
+  });
+  
+  const progress = ((currentScene - 1) / (totalScenes - 1)) * 100;
+  document.getElementById('progressFill').style.width = progress + '%';
+  
+  if (isAutoPlaying) {
+    clearInterval(autoPlayInterval);
+    startAutoPlay();
+  }
+}
+
+// Auto-play
+function startAutoPlay() {
+  autoPlayInterval = setInterval(() => {
+    if (currentScene < totalScenes) {
+      navigateScene(1);
+    } else {
+      stopAutoPlay();
+    }
+  }, 10000);
+}
+
+function stopAutoPlay() {
+  isAutoPlaying = false;
+  clearInterval(autoPlayInterval);
+  document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-play"></i>';
+}
+
+function toggleAutoPlay() {
+  if (isAutoPlaying) {
+    stopAutoPlay();
+  } else {
+    isAutoPlaying = true;
+    document.getElementById('playPauseBtn').innerHTML = '<i class="fas fa-pause"></i>';
+    startAutoPlay();
+  }
+}
+
+// Countdown
+function updateCountdown() {
+  const now = new Date();
+  const diff = now - startDate;
+  
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  
+  document.getElementById('days').textContent = days;
+  document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+  document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+}
+
+// Finale
+function showFinale() {
+  createHeartExplosion();
+  goToScene(11);
+  stopAutoPlay();
+  
+  // Start music if not playing
+  if (!isMusicPlaying) {
+    backgroundMusic.play();
+    document.getElementById('musicToggleBtn').innerHTML = '<i class="fas fa-pause"></i>';
+    isMusicPlaying = true;
+  }
+  
+  setTimeout(() => {
+    const heartInterval = setInterval(() => {
+      createFloatingHeart();
+    }, 300);
+    
+    setTimeout(() => clearInterval(heartInterval), 10000);
+  }, 1000);
+}
+
+function createHeartExplosion() {
+  const container = document.getElementById('heartsContainer');
+  const hearts = ['💕', '💖', '💗', '💝', '💘', '❤️', '🌹'];
+  
+  for (let i = 0; i < 50; i++) {
+    setTimeout(() => {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+      heart.style.fontSize = (1.5 + Math.random() * 2) + 'rem';
+      container.appendChild(heart);
+      
+      setTimeout(() => heart.remove(), 6000);
+    }, i * 50);
+  }
+}
+
+function createFloatingHeart() {
+  const container = document.getElementById('heartsContainer');
+  const hearts = ['💕', '💖', '💗', '💝', '💘', '❤️'];
+  const heart = document.createElement('div');
+  heart.className = 'floating-heart';
+  heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+  heart.style.left = Math.random() * 100 + '%';
+  heart.style.animationDuration = (4 + Math.random() * 3) + 's';
+  container.appendChild(heart);
+  
+  setTimeout(() => heart.remove(), 6000);
+}
+</script>
+</body>
+</html>
